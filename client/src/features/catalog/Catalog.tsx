@@ -7,14 +7,15 @@ import LoadingComponent from "../../app/layout/LoadingComponent";
 
 export default function Catalog() {
 
-  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     agent.Catalog.list()
-    .then(products => setProducts(products))
+    .then(products => { setProducts(products)
+    })
     .catch(error => console.log(error))
-    .finally(() => setLoading(false))
+    .finally(() => setLoading(false));
   }, [])
 
   if (loading) return <LoadingComponent message='Loading products...' />
